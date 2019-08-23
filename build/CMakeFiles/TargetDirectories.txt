@@ -1,0 +1,3 @@
+/home/jacob/Repos/math/build/CMakeFiles/rebuild_cache.dir
+/home/jacob/Repos/math/build/CMakeFiles/MathTest.dir
+/home/jacob/Repos/math/build/CMakeFiles/edit_cache.dir
