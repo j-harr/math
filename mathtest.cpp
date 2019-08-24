@@ -1,4 +1,5 @@
 #include <iostream>
+#include "src/vector.h"
 
 int main() {
 	std::cout << "Hello, world!" << std::endl;
@@ -6,6 +7,9 @@ int main() {
 
 	int x = 9;
 	int y = 10;
+
+	Vector<int> *myVect = new Vector<int>(4);
+	std::cout << myVect << std::endl;
 
 	std::cout << x << " + " << y << " = " << x+y << std::endl;
 	return 0;
