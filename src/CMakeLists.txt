@@ -1,1 +1,0 @@
-add_library(Vector vector.h vector.cpp)
