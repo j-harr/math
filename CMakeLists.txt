@@ -1,23 +1,30 @@
-cmake_minimum_required ( VERSION 3.13 )
+cmake_minimum_required ( VERSION 3.11...3.15 )
 
-project( Math CXX )
+project( JMath
+	VERSION 0.1
+	DESCRIPTION "Jacob's Math Library"
+	LANGUAGES CXX )
 
-set( Math_VERSION_MAJOR 0 )
-set( Math_VERSION_MINOR 1 )
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME )
+	set(C MAKE_CXX_EXTENSIONS OFF )
+	set_property( GLOBAL PROPERTY USE_FOLDERS ON )
+	include(CTest)
+	find_package(Doxygen)
+	if(Doxygen_FOUND)
+		add_subdirectory(docs)
+	else()
+		message(STATUS "Doxygen not found, not building docs")
+	endif()
+endif()
 
-#Add compiler warnings
-if(UNIX)
-	add_compile_options( -Wall -Wextra -Wpedantic)
-endif(UNIX)
+include(FetchContent)
+if( ${CMAKE_VERSION} VERSION_LESS 3.14 )
+	include( cmake/add_FetchContent_MakeAvailable.cmake )
+endif()
 
-add_library( MathLib "" )
-add_executable( tests )
+add_subdirectory( src )
+#add_subdirectory( apps )
 
-add_subdirectory( MathLib )
-add_subdirectory( test )
-
-target_include_directories( tests PUBLIC test PUBLIC MathLib )
-
-
-#target_link_libraries( tests MathLib )
-
+if(( CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME OR MODERN_CMAKE_BUILD_TESTING) AND BUILD_TESTING )
+	add_subdirectory( tests )
+endif()
